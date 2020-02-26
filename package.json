@@ -1,0 +1,22 @@
+{
+  "name": "google-spreadsheet-v2v3-wrapper",
+  "version": "1.0.0",
+  "description": "Feature-incomplete wrapper of the google-spreadsheet package to map its new v3 interface to the old v2 interface for compatibility",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">= 10.0.0"
+  },
+  "author": "David Trapp",
+  "license": "MIT",
+  "dependencies": {
+    "google-spreadsheet": "^3.0.8"
+  },
+  "homepage": "https://github.com/CherryDT/google-spreadsheet-v2v3-wrapper",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CherryDT/google-spreadsheet-v2v3-wrapper.git"
+  }
+}
