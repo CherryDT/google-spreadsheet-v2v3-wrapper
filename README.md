@@ -12,7 +12,7 @@ The wrapper supports callbacks (but also returns promises), and it takes care of
 
 There are a few limitations of course - if those apply to you, you will have to work around them in your code:
 
-* It needs node 10+. (There may be a way to transpile it using Babel to support older node.js versions in case you can't upgrade, but I didn't play around with that.)
+* It needs node 8+. (There may be a way to transpile it using Babel to support older node.js versions in case you can't upgrade, but I didn't play around with that.)
 * The usage of `getRows` with `orderBy`, `reverse` or `query` is **not supported** and will throw!
 * Writing to fields in non-normalized form (not all-lowercase without spaces) will not work.
 * `setAuthToken` is not supported and will throw. Only `useServiceAccountAuth` is supported.
