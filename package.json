@@ -1,6 +1,6 @@
 {
   "name": "google-spreadsheet-v2v3-wrapper",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Feature-incomplete wrapper of the google-spreadsheet package to map its new v3 interface to the old v2 interface for compatibility",
   "main": "index.js",
   "scripts": {
