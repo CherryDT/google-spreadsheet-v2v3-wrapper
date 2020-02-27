@@ -35,16 +35,19 @@ class SpreadsheetWorksheet {
     await this._ensureColumnsLoaded()
   }
 
+  _v2ifyField (caption) {
+    return String(caption).replace(/[^\w-]/g, '').toLowerCase()
+  }
+
   async _ensureColumnsLoaded () {
     if (!this.v3.headerValues) await this.v3.loadHeaderRow()
 
     if (this.v3.headerValues.join(';') === Object.keys((this._v3ToV2HeaderMap || {})).join(';')) return
 
     // In v2, we had fields in a normalized way in the API - recreate this behavior
-    const v2ifyField = caption => String(caption).replace(/[^\w-]/g, '').toLowerCase()
     this._v2ToV3HeaderMap = {}
     for (const field of this.v3.headerValues) {
-      const v2Field = v2ifyField(field)
+      const v2Field = this._v2ifyField(field)
       if (!field || !v2Field) continue
       this._v2ToV3HeaderMap[v2Field] = field
     }
@@ -55,7 +58,8 @@ class SpreadsheetWorksheet {
 
     const v3Data = {}
     for (const [key, value] of Object.entries(data)) {
-      const v3Key = this._v2ToV3HeaderMap[key]
+      const v2Key = this._v2ifyField(key)
+      const v3Key = this._v2ToV3HeaderMap[v2Key]
       if (v3Key) v3Data[v3Key] = value
     }
 

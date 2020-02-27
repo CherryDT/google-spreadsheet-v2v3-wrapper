@@ -14,7 +14,7 @@ class SpreadsheetRow {
     }
    */
 
-  constructor (v3, worksheet) {
+  constructor (v3, worksheet, proxify = true) {
     this.v3 = v3
     this.worksheet = worksheet
     this.spreadsheet = worksheet.spreadsheet
@@ -30,6 +30,28 @@ class SpreadsheetRow {
         },
         configurable: true,
         enumerable: true
+      })
+    }
+
+    // Also allow accessing fields with in a non-normalized manner
+    if (proxify && typeof Proxy !== 'undefined') {
+      return new Proxy(this, {
+        get (target, prop) {
+          const normalizedProp = worksheet._v2ifyField(prop)
+          if (worksheet._v2ToV3HeaderMap[normalizedProp]) {
+            return target[normalizedProp]
+          } else {
+            return target[prop]
+          }
+        },
+        set (target, prop, newValue) {
+          const normalizedProp = worksheet._v2ifyField(prop)
+          if (worksheet._v2ToV3HeaderMap[normalizedProp]) {
+            target[normalizedProp] = newValue
+          } else {
+            target[prop] = newValue
+          }
+        }
       })
     }
   }

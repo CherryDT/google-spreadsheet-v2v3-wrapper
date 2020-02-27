@@ -14,8 +14,8 @@ There are a few limitations of course - if those apply to you, you will have to 
 
 * It needs node 8+. (There may be a way to transpile it using Babel to support older node.js versions in case you can't upgrade, but I didn't play around with that.)
 * The usage of `getRows` with `orderBy`, `reverse` or `query` is **not supported** and will throw!
-* Writing to fields in non-normalized form (not all-lowercase without spaces) will not work.
 * `setAuthToken` is not supported and will throw. Only `useServiceAccountAuth` is supported.
+* Writing to fields with non-normalized field name will work, and reading is also possible using the non-normalized field name, but it won't be enumerable. Only the normalized field names are enumerable properties.
 * Some data like author and last update date is simply not returned in the new API. Attempts to access these fields will throw an error.
 * The IDs returned for sheets and rows are not compatible with those returned by the old API.
 * Formulae are using the **A1 format instead of R1C1**, and this wrapper does **not** convert the format!
