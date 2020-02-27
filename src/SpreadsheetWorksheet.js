@@ -110,7 +110,10 @@ class SpreadsheetWorksheet {
   async getRows ({ offset, limit, orderBy, reverse, query } = {}) {
     await this._ensureColumnsLoaded()
     if (orderBy || reverse || query) throw new Error('The orderBy/reverse/query options are no longer supported for getRows!')
-    const v3Rows = await this.v3.getRows({ offset, limit })
+    const v3Rows = await this.v3.getRows({
+      offset: offset ? offset - 1 : undefined,
+      limit
+    })
     return v3Rows.map(v3Row => new SpreadsheetRow(v3Row, this))
   }
 
